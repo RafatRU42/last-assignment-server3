@@ -19,17 +19,26 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
+
 async function run(){
     
     try{
 
         const productCollection = client.db('mobile-resale-market').collection('addProduct')
+        const newProductCollection = client.db('mobile-resale-market').collection('addAProduct')
 
 
 
         app.post('/addProduct',async(req,res)=>{
             const product = req.body;
-            const result = await productCollection.insertOne(product);
+            const result = await newProductCollection.insertOne(product);
+            res.send(result)
+        })
+
+
+        app.get('/myProducts',async(req,res)=>{
+            const query = {};
+            const result = await newProductCollection.find(query).toArray()
             res.send(result)
         })
 
