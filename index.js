@@ -37,10 +37,30 @@ async function run(){
 
 
         app.get('/myProducts',async(req,res)=>{
-            const query = {};
+            const email = req.query.email;
+            const query = {email:email};
             const result = await newProductCollection.find(query).toArray()
             res.send(result)
         })
+
+        app.get('/Samsung',async(req,res) =>{
+            const query = {category:"Samsung"}
+            const result = await newProductCollection.find(query).toArray()
+            res.send(result)
+        })
+
+        app.get('/VIVO',async(req,res) =>{
+            const query = {category:"VIVO"}
+            const result = await newProductCollection.find(query).toArray()
+            res.send(result)
+        })
+
+        app.get('/iPhone',async(req,res) =>{
+            const query = {category:"iPhone"}
+            const result = await newProductCollection.find(query).toArray()
+            res.send(result)
+        })
+     
 
 
 
