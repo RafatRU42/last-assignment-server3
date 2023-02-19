@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 
 require('dotenv').config()
@@ -38,8 +38,8 @@ async function run(){
 
         app.get('/myProducts',async(req,res)=>{
             const email = req.query.email;
-            const query = {email:email};
-            const result = await newProductCollection.find(query).toArray()
+            const query = {userEmail:email};
+            const result = await newProductCollection.find(query).toArray() 
             res.send(result)
         })
 
@@ -60,6 +60,7 @@ async function run(){
             const result = await newProductCollection.find(query).toArray()
             res.send(result)
         })
+    
      
 
 
